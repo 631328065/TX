@@ -1,0 +1,32 @@
+.page-box{
+    .ant-tabs-tab{
+        font-size: 20px;
+        .ant-tabs-tab-btn{
+            color: #000 !important;
+        }
+    }
+}
+
+.cols-title{
+    height: 40px;
+    font-size: 15px;
+    text-align: center;
+}
+
+.equipment{
+    font-weight: 800;
+}
+
+.conten-box{
+    padding: 10px;
+    & .ant-radio-button-wrapper-checked{
+        background: #000 !important;
+        border-color: #000 !important;
+    }
+    & .ant-radio-button-wrapper-checked::before{
+        background-color: #000 !important;
+    }
+    & .ant-radio-button-wrapper:nth-child(1){
+        margin-right: 10px;
+    }
+}
