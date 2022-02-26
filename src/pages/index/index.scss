@@ -18,7 +18,7 @@
 }
 
 .conten-box{
-    padding: 10px;
+    padding: 10px 0;
     & .ant-radio-button-wrapper-checked{
         background: #000 !important;
         border-color: #000 !important;
@@ -29,4 +29,8 @@
     & .ant-radio-button-wrapper:nth-child(1){
         margin-right: 10px;
     }
+}
+
+.conten-btn{
+    margin-left: 10px;
 }

@@ -3,6 +3,8 @@ import { Tabs, Radio, Row, Col } from 'antd';
 import "./index.scss";
 import Equipment from "../../components/equipment/equipment";
 import axios from 'axios';
+import Formings from "../../components/forming/forming";
+import Special from "../../components/special/special";
 
 const { TabPane } = Tabs;
 
@@ -43,7 +45,9 @@ class Main extends React.Component {
                     key: "4",
                 },
             ],
-            EquipConfig: {}
+            EquipConfig: {},
+            formings: [],
+            special: []
         }
     }
 
@@ -52,14 +56,23 @@ class Main extends React.Component {
     }
 
     changeEquipments(e) {
+        let { EquipConfig } = this.state;
+
+        let special = [];
+        for (const i in EquipConfig) {
+            if (EquipConfig[i].type === "特殊装备") {
+                special.push(EquipConfig[i]);
+            }
+        }
+
         this.setState({
             equipmentKey: e.target.value,
+            special
         });
     }
 
     getData() {
         axios.get("jkConfig/config.json").then(res => {
-            console.log(res.data.EquipConfig, "res");
             this.setState({
                 EquipConfig: res.data.EquipConfig,
             });
@@ -70,13 +83,34 @@ class Main extends React.Component {
         this.getData();
     }
 
+    getIcon(icon) {
+        let { EquipConfig } = this.state;
+        let formings = [];
+        for (const i in EquipConfig) {
+            if (EquipConfig[i].synthesis1 === icon || EquipConfig[i].synthesis2 === icon) {
+                formings.push(EquipConfig[i])
+            }
+        }
+
+        this.setState({
+            formings
+        })
+    }
+
     render() {
-        let { equipmentKey, cols, EquipConfig } = this.state;
+        let { equipmentKey, cols, EquipConfig, formings, special } = this.state;
 
         let renderEquipment = () => {
             if (equipmentKey === "1") {
                 return (
-                    <Equipment EquipConfig={EquipConfig} />
+                    <div>
+                        <Equipment EquipConfig={EquipConfig} getIcon={this.getIcon.bind(this)} />
+                        <Formings formings={formings}></Formings>
+                    </div>
+                )
+            } else {
+                return (
+                    <Special special={special}></Special>
                 )
             }
         }
@@ -101,13 +135,15 @@ class Main extends React.Component {
                     }
                 </Row>
                 <div className="conten-box">
-                    <Radio.Group
-                        options={this.state.equipments}
-                        onChange={this.changeEquipments}
-                        value={equipmentKey}
-                        optionType="button"
-                        buttonStyle="solid"
-                    />
+                    <div className="conten-btn">
+                        <Radio.Group
+                            options={this.state.equipments}
+                            onChange={this.changeEquipments}
+                            value={equipmentKey}
+                            optionType="button"
+                            buttonStyle="solid"
+                        />
+                    </div>
                     {
                         renderEquipment()
                     }

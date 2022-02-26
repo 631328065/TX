@@ -1,8 +1,16 @@
-.equipment{
-    margin-top: 10px;
+.equipments-box{
+    padding-left: 10px;
+    height: 110px;
+    overflow: hidden;
+    overflow-y: scroll;
+    border-bottom: 1px solid #ededed;
+}
+
+.equipments{
     display: flex;
     align-items: center;
-    .equipment-imags{
-        margin-right: 10px;
+    flex-wrap: wrap;
+    .equipments-imags{
+        margin: 10px 10px 0 0;
     }
 }

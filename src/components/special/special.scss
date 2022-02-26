@@ -1,0 +1,28 @@
+.special-box{
+    margin-top: 10px;
+    border-top: 1px solid #ededed;
+}
+.special-items{
+    padding-left: 10px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    border-bottom: 10px solid #ededed;
+    .special-items-img{
+        width: 30%;
+    }
+    .special-items-content-title{
+        margin-bottom: 5px;
+        font-size: 18px;
+        font-weight: 600;
+    }
+    .special-items-content-desc{
+        span{
+            font-size: 14px;
+            font-weight: 600;  
+        }
+        div{
+            color: #9c9a9a;
+        }
+    }
+}
